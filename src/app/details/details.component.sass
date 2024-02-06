@@ -1,0 +1,54 @@
+.article
+  display: flex
+  position: relative
+  background: var(--accent-color)
+  padding-bottom: 30px
+  margin-bottom: 20px
+  min-height: 700px
+
+.content
+  flex: 1
+
+.listing-heading
+  color: var(--primary-color)
+  font-size: 50px
+  min-height: 120px
+  text-align: center
+  display: flex
+  align-items: center
+  margin: 0px
+  padding: 0px 10px
+
+.listing-description
+  padding: 20px
+
+.listing-location::before
+  content: url("/assets/location-pin.svg") / ""
+  font-size: 24px
+  margin-bottom: 15px
+
+.listing-text
+  color: var(--primary-color)
+  padding: 10px
+
+.image-container
+  width: 50%
+  position: relative
+  overflow: hidden
+
+.listing-flyer
+  width: 100%
+  height: auto
+  object-fit: cover
+
+li
+  list-style: none
+
+/* Media query for responsiveness */
+@media (max-width: 768px)
+  .article
+    flex-direction: column
+
+  .image-container
+    width: 100%
+    order: -1

@@ -1,0 +1,78 @@
+.results
+  display: grid
+  column-gap: 14px
+  row-gap: 14px
+  grid-template-columns: repeat(auto-fill, minmax(400px, 400px))
+  margin-top: 0px
+  justify-content: space-around
+
+.toolbar
+  position: sticky
+  padding-bottom: 10px
+  top: 80px
+  background-color: white
+  display: flex
+  justify-content: space-between
+  z-index: 1
+
+input[type="text"]
+  border: solid 1px var(--primary-color)
+  padding: 10px
+  border-radius: 8px
+  margin-right: 4px
+  display: inline-block
+  width: 30%
+
+button
+  padding: 10px
+  border: solid 1px var(--primary-color)
+  background: var(--primary-color)
+  color: white
+  border-radius: 8px
+
+.cart-header
+  margin: 0
+  padding: 10px
+  background-color: white
+
+mat-menu, mat-list
+  background-color: white
+  padding: 10px
+
+.badge
+  padding-left: 9px
+  padding-right: 9px
+  -webkit-border-radius: 9px
+  -moz-border-radius: 9px
+  border-radius: 9px
+
+.label-warning[href], .badge-warning[href]
+  background-color: #c67605
+
+#lblCartCount
+  font-size: 12px
+  background: #ff0000
+  color: #fff
+  padding: 0 5px
+  vertical-align: top
+  margin-left: -10px
+
+.sticky-date
+  position: sticky
+  top: 139px
+  text-align: center
+  background-color: rgba(255, 255, 255, 0.7) !important
+  background-color: white
+  z-index: 1
+  padding: 5px
+
+@media (min-width: 500px) and (max-width: 768px)
+  .results
+    grid-template-columns: repeat(2, 1fr)
+
+  input[type="text"]
+    width: 70%
+
+@media (max-width: 499px)
+  .results
+    grid-template-columns: 1fr
