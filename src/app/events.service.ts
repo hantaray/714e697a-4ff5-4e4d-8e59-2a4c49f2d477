@@ -5,7 +5,7 @@ import { SingleEvent } from './single-event';
   providedIn: 'root'
 })
 export class EventsService {
-  url = 'https://teclead-ventures.github.io/data/london-events.json';
+  url = 'http://localhost:3000/london/';
 
   async getAllEvents(): Promise<SingleEvent[]> {
     const data = await fetch(this.url);
