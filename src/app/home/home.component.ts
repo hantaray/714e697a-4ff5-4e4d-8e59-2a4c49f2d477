@@ -34,7 +34,8 @@ import { MatIconModule } from '@angular/material/icon';
         </button>
         <!-- Shopping cart menu -->
         <mat-menu #menu="matMenu">
-          <h2 class="cart-header">Your events:</h2>
+          <h2 class="cart">Your events:</h2>
+          <p class="cart" *ngIf="cartContentCount == 0">There are no events in your cart</p>
           <!-- Display events in the cart -->
           <mat-list class="cart" role="list" *ngFor="let singleEvent of eventsInCartList">
             <p>{{singleEvent.title}}</p>
