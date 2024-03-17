@@ -11,7 +11,7 @@ import { HomeComponent } from './home/home.component';
   <main>
     <a [routerLink]="['/']">
       <header class="brand-name">
-        <img class="brand-logo" src="/assets/events-logo.png" alt="Eventslogo" aria-hidden="true" />
+        <img class="brand-logo" src="/assets/eventmood_logo.png" alt="EventMood logo" aria-hidden="true" />
       </header>
     </a>
     <section class="content">
