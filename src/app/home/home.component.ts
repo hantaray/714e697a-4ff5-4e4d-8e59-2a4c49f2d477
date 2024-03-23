@@ -27,7 +27,7 @@ import { MatIconModule } from '@angular/material/icon';
     <div class="toolbar">
       <input type="text" placeholder="Search..." (input)="filterResults($event)">
       <div class="menu-button">
-        <button mat-icon-button [matMenuTriggerFor]="menu">
+        <button class="shopping-cart-button" mat-icon-button [matMenuTriggerFor]="menu">
           <mat-icon>shopping_cart</mat-icon>
           <!-- Display the count of items in the cart -->
           <span class='badge badge-warning' id='lblCartCount' *ngIf="cartContentCount > 0">{{cartContentCount}}</span>
