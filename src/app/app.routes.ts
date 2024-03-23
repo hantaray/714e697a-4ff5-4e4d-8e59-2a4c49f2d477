@@ -7,7 +7,7 @@ const routeConfig: Routes = [
   {
     path: '',
     component: HomeComponent,
-    title: 'Events'
+    title: 'EventMood'
   },
   {
     path: 'details/:id',
