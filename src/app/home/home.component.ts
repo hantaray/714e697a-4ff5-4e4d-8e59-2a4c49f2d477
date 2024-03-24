@@ -38,7 +38,7 @@ import { MatIconModule } from '@angular/material/icon';
           <p class="cart" *ngIf="cartContentCount == 0">There are no events in your cart</p>
           <!-- Display events in the cart -->
           <mat-list class="cart" role="list" *ngFor="let singleEvent of eventsInCartList">
-            <p>{{singleEvent.title}}</p>
+            <p>{{singleEvent.title}}</p><button mat-icon-button (click)="removeFromCart(singleEvent)">X</button>
           </mat-list>
         </mat-menu>
       </div>
@@ -114,6 +114,16 @@ export class HomeComponent {
     // Remove event from filteredEventsList
     this.filteredEventsList = this.filteredEventsList.filter((e) => e._id !== event._id);
     console.log('filteredEventsList', this.filteredEventsList.length)
+    // Update the count of items in the cart
+    this.cartContentCount = this.eventsInCartList.length;
+  }
+
+  removeFromCart(event: SingleEvent) {
+    this.eventsInCartList = this.eventsInCartList.filter((e) => e._id !== event._id);
+    this.filteredEventsList.push(event);
+    // Sort the events by date
+    this.filteredEventsList = this.filteredEventsList.sort((a, b) => (a.date < b.date ? -1 : 1));
+
     // Update the count of items in the cart
     this.cartContentCount = this.eventsInCartList.length;
   }
