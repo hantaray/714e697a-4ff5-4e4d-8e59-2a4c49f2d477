@@ -9,6 +9,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatButtonModule } from '@angular/material/button';
 import { MatListModule } from '@angular/material/list';
 import { MatIconModule } from '@angular/material/icon';
+import { MatSelectModule } from '@angular/material/select';
 
 @Component({
   selector: 'app-home',
@@ -21,11 +22,18 @@ import { MatIconModule } from '@angular/material/icon';
     MatMenuModule,
     MatListModule,
     MatIconModule,
+    MatSelectModule
   ],
   template: `
     <!-- Toolbar with search input and shopping cart -->
     <div class="toolbar">
       <input type="text" placeholder="Search..." (input)="filterResults($event)">
+      <mat-form-field>
+  <mat-select (selectionChange)="getEventsByCity($event.value)" [(value)]="selectedCity">
+    <mat-option value="london">London</mat-option>
+    <mat-option value="berlin">Berlin</mat-option>
+  </mat-select>
+</mat-form-field>
       <div class="menu-button">
         <button class="shopping-cart-button" mat-icon-button [matMenuTriggerFor]="menu">
           <mat-icon>shopping_cart</mat-icon>
@@ -71,9 +79,17 @@ export class HomeComponent {
 
   displayedDate: Date | null = null;
 
+  selectedCity: string = 'london';
+
   constructor() {
+    this.getEventsByCity(this.selectedCity);
+    // Listen to scroll event to update displayed date
+    window.addEventListener('scroll', this.updateDisplayedDate.bind(this));
+  }
+
+  getEventsByCity(city: string) {
     // Fetching all events from the service
-    this.eventsService.getAllEvents().then((singleEventList: SingleEvent[]) => {
+    this.eventsService.getAllEvents(city).then((singleEventList: SingleEvent[]) => {
       this.singleEventList = singleEventList;
       this.filteredEventsList = singleEventList;
       // Sort the events by date
@@ -83,8 +99,6 @@ export class HomeComponent {
         this.displayedDate = this.filteredEventsList[0].date;
       }
     });
-    // Listen to scroll event to update displayed date
-    window.addEventListener('scroll', this.updateDisplayedDate.bind(this));
   }
 
   // Filter events based on search input

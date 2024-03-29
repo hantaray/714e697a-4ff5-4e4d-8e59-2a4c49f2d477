@@ -5,17 +5,17 @@ import { SingleEvent } from './single-event';
   providedIn: 'root'
 })
 export class EventsService {
-  url = 'http://localhost:3000/london/';
+  url = 'http://localhost:3000/';
 
-  async getAllEvents(): Promise<SingleEvent[]> {
-    const data = await fetch(this.url);
+  async getAllEvents(city: string): Promise<SingleEvent[]> {
+    const data = await fetch(this.url + city);
     console.log('url', this.url)
     return await data.json() ?? [];
   }
 
   async getEventById(id: string): Promise<SingleEvent | undefined> {
     // Fetch all events
-    const allEvents = await this.getAllEvents();
+    const allEvents = await this.getAllEvents("berlin");
 
     // Find the event with the given ID
     const event = allEvents.find(event => event._id.toString() === id);
