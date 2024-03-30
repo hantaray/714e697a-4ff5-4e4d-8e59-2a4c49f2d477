@@ -28,12 +28,10 @@ import { MatSelectModule } from '@angular/material/select';
     <!-- Toolbar with search input and shopping cart -->
     <div class="toolbar">
       <input type="text" placeholder="Search..." (input)="filterResults($event)">
-      <mat-form-field>
-  <mat-select (selectionChange)="getEventsByCity($event.value)" [(value)]="selectedCity">
-    <mat-option value="london">London</mat-option>
-    <mat-option value="berlin">Berlin</mat-option>
-  </mat-select>
-</mat-form-field>
+      <mat-select class="select-panel" (selectionChange)="getEventsByCity($event.value)" [(value)]="selectedCity">
+        <mat-option value="berlin">Berlin</mat-option>
+        <mat-option value="london">London</mat-option>
+      </mat-select>
       <div class="menu-button">
         <button class="shopping-cart-button" mat-icon-button [matMenuTriggerFor]="menu">
           <mat-icon>shopping_cart</mat-icon>
