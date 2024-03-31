@@ -27,7 +27,7 @@ import { MatSelectModule } from '@angular/material/select';
   template: `
     <!-- Toolbar with search input and shopping cart -->
     <div class="toolbar">
-      <input type="text" placeholder="Search..." (input)="filterResults($event)">
+      <input class="search-input" type="text" placeholder="Search..." (input)="filterResults($event)">
       <mat-select class="select-panel" (selectionChange)="getEventsByCity($event.value)" [(value)]="selectedCity">
         <mat-option value="berlin">Berlin</mat-option>
         <mat-option value="london">London</mat-option>
