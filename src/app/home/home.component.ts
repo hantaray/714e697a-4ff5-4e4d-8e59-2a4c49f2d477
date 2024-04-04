@@ -59,7 +59,7 @@ import { MatSelectModule } from '@angular/material/select';
     <section class="results">
       <!-- Loop through filtered events and display them -->
       <div *ngFor="let singleEvent of filteredEventsList" class="event" [attr.data-date]="singleEvent.date">
-        <app-events [singleEvent]="singleEvent" (addToCartClicked)="addToCart(singleEvent)"></app-events>
+        <app-events [singleEvent]="singleEvent" (click)="addToCart(singleEvent)"></app-events>
       </div>
     </section>
   `,
