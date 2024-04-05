@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { CommonModule } from '@angular/common';
 
 import { SingleEvent } from './single-event';
 import { HomeComponent } from './home/home.component';
@@ -10,7 +11,7 @@ import { MatListModule } from '@angular/material/list';
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [HomeComponent, RouterModule, MatMenuModule, MatIconModule, MatListModule],
+  imports: [HomeComponent, RouterModule, MatMenuModule, MatIconModule, MatListModule, CommonModule],
   template: `
   <main>
     <a [routerLink]="['/']">
