@@ -14,9 +14,10 @@ import { MatListModule } from '@angular/material/list';
   imports: [HomeComponent, RouterModule, MatMenuModule, MatIconModule, MatListModule, CommonModule],
   template: `
   <main>
-    <a [routerLink]="['/']">
-      <header class="brand-name">
-        <img class="brand-logo" src="/assets/eventmood_logo.png" alt="EventMood logo" aria-hidden="true" />
+    <header class="brand-name">
+        <a [routerLink]="['/']">
+          <img class="brand-logo" src="/assets/eventmood_logo.png" alt="EventMood logo" aria-hidden="true" />
+        </a>
         <div class="menu-button">
         <button class="shopping-cart-button" mat-icon-button [matMenuTriggerFor]="menu">
           <mat-icon>shopping_cart</mat-icon>
@@ -34,7 +35,6 @@ import { MatListModule } from '@angular/material/list';
         </mat-menu>
       </div>
       </header>
-    </a>
     <section class="content">
       <router-outlet></router-outlet>
     </section>
