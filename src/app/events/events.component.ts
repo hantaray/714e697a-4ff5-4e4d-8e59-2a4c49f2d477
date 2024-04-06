@@ -1,10 +1,11 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 
 import { SingleEvent } from '../single-event';
 import { MatDialog } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
+import { AppComponent } from '../app.component';
 
 @Component({
   selector: 'app-events',
@@ -25,18 +26,17 @@ import { MatIconModule } from '@angular/material/icon';
     <!-- Link to show event details -->
     <a [routerLink]="['details', singleEvent._id]">Show event</a>
     <!-- Button to add event to cart -->
-    <button class="addCartBtn" (click)="addToCart(singleEvent._id)">+</button>
+    <button class="addCartBtn" (click)="addToCart(singleEvent)">+</button>
   </section>
   `,
   styleUrl: './events.component.sass'
 })
 export class EventsComponent {
   @Input() singleEvent!: SingleEvent; // Input property to receive single event data
-  @Output() addToCartClicked: EventEmitter<void> = new EventEmitter<void>(); // Output event emitter for adding to cart
-
   constructor(public dialog: MatDialog) { } // MatDialog injection for displaying dialogs
 
-  addToCart(eventId: number) {
-    this.addToCartClicked.emit(); // Emit event when adding to cart button is clicked
+  addToCart(eventId: SingleEvent) {
+    // this.addToCartClicked.emit(); // Emit event when adding to cart button is clicked
+    AppComponent.addToCart(eventId);
   }
 }

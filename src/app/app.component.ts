@@ -44,17 +44,35 @@ import { MatListModule } from '@angular/material/list';
 })
 export class AppComponent {
   title = 'events';
-  cartContentCount: number = 0;
-  filteredEventsList: SingleEvent[] = [];
-  eventsInCartList: SingleEvent[] = [];
+  static cartContentCount: number = 0;
+  // cartContentCount: number = 0;
+  static filteredEventsList: SingleEvent[] = [];
+  static eventsInCartList: SingleEvent[] = [];
+
+  get cartContentCount() {
+    return AppComponent.cartContentCount;
+  }
+
+  get eventsInCartList() {
+    return AppComponent.eventsInCartList;
+  }
+
+  static addToCart(event: SingleEvent) {
+    // Add event to the cart if it's not already there
+    if (AppComponent.eventsInCartList.indexOf(event) === -1) {
+      AppComponent.eventsInCartList.push(event);
+    }
+    // Update the count of items in the cart
+    AppComponent.cartContentCount = AppComponent.eventsInCartList.length;
+  }
 
   removeFromCart(event: SingleEvent) {
-    this.eventsInCartList = this.eventsInCartList.filter((e) => e._id !== event._id);
-    this.filteredEventsList.push(event);
+    AppComponent.eventsInCartList = this.eventsInCartList.filter((e) => e._id !== event._id);
+    AppComponent.filteredEventsList.push(event);
     // Sort the events by date
-    this.filteredEventsList = this.filteredEventsList.sort((a, b) => (a.date < b.date ? -1 : 1));
+    AppComponent.filteredEventsList = AppComponent.filteredEventsList.sort((a, b) => (a.date < b.date ? -1 : 1));
 
     // Update the count of items in the cart
-    this.cartContentCount = this.eventsInCartList.length;
+    AppComponent.cartContentCount = AppComponent.eventsInCartList.length;
   }
 }

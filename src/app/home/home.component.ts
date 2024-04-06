@@ -10,6 +10,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatListModule } from '@angular/material/list';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSelectModule } from '@angular/material/select';
+import { AppComponent } from '../app.component';
 
 @Component({
   selector: 'app-home',
@@ -32,22 +33,6 @@ import { MatSelectModule } from '@angular/material/select';
         <mat-option value="berlin">Berlin</mat-option>
         <mat-option value="london">London</mat-option>
       </mat-select>
-      <div class="menu-button">
-        <button class="shopping-cart-button" mat-icon-button [matMenuTriggerFor]="menu">
-          <mat-icon>shopping_cart</mat-icon>
-          <!-- Display the count of items in the cart -->
-          <span class='badge badge-warning' id='lblCartCount' *ngIf="cartContentCount > 0">{{cartContentCount}}</span>
-        </button>
-        <!-- Shopping cart menu -->
-        <mat-menu #menu="matMenu">
-          <h2 class="cart">Your events:</h2>
-          <p class="cart" *ngIf="cartContentCount == 0">There are no events in your cart</p>
-          <!-- Display events in the cart -->
-          <mat-list class="cart" role="list" *ngFor="let singleEvent of eventsInCartList">
-            <p>{{singleEvent.title}}</p><button mat-icon-button (click)="removeFromCart(singleEvent)">X</button>
-          </mat-list>
-        </mat-menu>
-      </div>
     </div>
 
     <!-- Display the currently selected date -->
@@ -72,8 +57,6 @@ export class HomeComponent {
 
   singleEventList: SingleEvent[] = [];
   filteredEventsList: SingleEvent[] = [];
-  eventsInCartList: SingleEvent[] = [];
-  cartContentCount: number = 0;
 
   displayedDate: Date | null = null;
 
@@ -107,38 +90,37 @@ export class HomeComponent {
     if (!value) {
       // Clear filter, include events from singleEventList that are not in the cart
       this.filteredEventsList = this.singleEventList.filter(event =>
-        !this.eventsInCartList.includes(event)
+        !AppComponent.eventsInCartList.includes(event)
       );
       return;
     }
 
     this.filteredEventsList = this.singleEventList.filter(event =>
-      event.title.toLowerCase().includes(value) && !this.eventsInCartList.includes(event)
+      event.title.toLowerCase().includes(value) && !AppComponent.eventsInCartList.includes(event)
     );
   }
 
   // Add event to the cart
   addToCart(event: SingleEvent) {
     // Add event to the cart if it's not already there
-    if (this.eventsInCartList.indexOf(event) === -1) {
-      this.eventsInCartList.push(event);
+    if (AppComponent.eventsInCartList.indexOf(event) === -1) {
+      AppComponent.eventsInCartList.push(event);
     }
     // Remove event from filteredEventsList
     this.filteredEventsList = this.filteredEventsList.filter((e) => e._id !== event._id);
-    console.log('filteredEventsList', this.filteredEventsList.length)
     // Update the count of items in the cart
-    this.cartContentCount = this.eventsInCartList.length;
+    AppComponent.cartContentCount = AppComponent.eventsInCartList.length;
   }
 
-  removeFromCart(event: SingleEvent) {
-    this.eventsInCartList = this.eventsInCartList.filter((e) => e._id !== event._id);
-    this.filteredEventsList.push(event);
-    // Sort the events by date
-    this.filteredEventsList = this.filteredEventsList.sort((a, b) => (a.date < b.date ? -1 : 1));
+  // removeFromCart(event: SingleEvent) {
+  //   this.eventsInCartList = this.eventsInCartList.filter((e) => e._id !== event._id);
+  //   this.filteredEventsList.push(event);
+  //   // Sort the events by date
+  //   this.filteredEventsList = this.filteredEventsList.sort((a, b) => (a.date < b.date ? -1 : 1));
 
-    // Update the count of items in the cart
-    this.cartContentCount = this.eventsInCartList.length;
-  }
+  //   // Update the count of items in the cart
+  //   this.cartContentCount = this.eventsInCartList.length;
+  // }
 
   // Update the displayed date based on scroll position
   updateDisplayedDate() {
