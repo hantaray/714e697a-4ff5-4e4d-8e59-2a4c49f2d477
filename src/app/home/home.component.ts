@@ -102,25 +102,16 @@ export class HomeComponent {
 
   // Add event to the cart
   addToCart(event: SingleEvent) {
-    // Add event to the cart if it's not already there
-    if (AppComponent.eventsInCartList.indexOf(event) === -1) {
-      AppComponent.eventsInCartList.push(event);
-    }
+    AppComponent.addToCart(event);
     // Remove event from filteredEventsList
     this.filteredEventsList = this.filteredEventsList.filter((e) => e._id !== event._id);
-    // Update the count of items in the cart
-    AppComponent.cartContentCount = AppComponent.eventsInCartList.length;
   }
 
-  // removeFromCart(event: SingleEvent) {
-  //   this.eventsInCartList = this.eventsInCartList.filter((e) => e._id !== event._id);
-  //   this.filteredEventsList.push(event);
-  //   // Sort the events by date
-  //   this.filteredEventsList = this.filteredEventsList.sort((a, b) => (a.date < b.date ? -1 : 1));
-
-  //   // Update the count of items in the cart
-  //   this.cartContentCount = this.eventsInCartList.length;
-  // }
+  removeFromCart(event: SingleEvent) {
+    this.filteredEventsList.push(event);
+    // Sort the events by date
+    this.filteredEventsList = this.filteredEventsList.sort((a, b) => (a.date < b.date ? -1 : 1));
+  }
 
   // Update the displayed date based on scroll position
   updateDisplayedDate() {
