@@ -56,7 +56,7 @@ export class HomeComponent {
   eventsService: EventsService = inject(EventsService);
 
   singleEventList: SingleEvent[] = [];
-  filteredEventsList: SingleEvent[] = [];
+  static filteredEventsList: SingleEvent[] = [];
 
   displayedDate: Date | null = null;
 
@@ -68,13 +68,15 @@ export class HomeComponent {
     window.addEventListener('scroll', this.updateDisplayedDate.bind(this));
   }
 
+  get filteredEventsList() { return HomeComponent.filteredEventsList; }
+
   getEventsByCity(city: string) {
     // Fetching all events from the service
     this.eventsService.getAllEvents(city).then((singleEventList: SingleEvent[]) => {
       this.singleEventList = singleEventList;
-      this.filteredEventsList = singleEventList;
+      HomeComponent.filteredEventsList = singleEventList;
       // Sort the events by date
-      this.filteredEventsList = this.filteredEventsList.sort((a, b) => (a.date < b.date ? -1 : 1));
+      HomeComponent.filteredEventsList = this.filteredEventsList.sort((a, b) => (a.date < b.date ? -1 : 1));
       // Set the initial displayed date
       if (this.filteredEventsList.length > 0) {
         this.displayedDate = this.filteredEventsList[0].date;
@@ -89,13 +91,13 @@ export class HomeComponent {
 
     if (!value) {
       // Clear filter, include events from singleEventList that are not in the cart
-      this.filteredEventsList = this.singleEventList.filter(event =>
+      HomeComponent.filteredEventsList = this.singleEventList.filter(event =>
         !AppComponent.eventsInCartList.includes(event)
       );
       return;
     }
 
-    this.filteredEventsList = this.singleEventList.filter(event =>
+    HomeComponent.filteredEventsList = this.singleEventList.filter(event =>
       event.title.toLowerCase().includes(value) && !AppComponent.eventsInCartList.includes(event)
     );
   }
@@ -104,13 +106,7 @@ export class HomeComponent {
   addToCart(event: SingleEvent) {
     AppComponent.addToCart(event);
     // Remove event from filteredEventsList
-    this.filteredEventsList = this.filteredEventsList.filter((e) => e._id !== event._id);
-  }
-
-  removeFromCart(event: SingleEvent) {
-    this.filteredEventsList.push(event);
-    // Sort the events by date
-    this.filteredEventsList = this.filteredEventsList.sort((a, b) => (a.date < b.date ? -1 : 1));
+    HomeComponent.filteredEventsList = this.filteredEventsList.filter((e) => e._id !== event._id);
   }
 
   // Update the displayed date based on scroll position

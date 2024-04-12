@@ -74,5 +74,9 @@ export class AppComponent {
 
     // Update the count of items in the cart
     AppComponent.cartContentCount = AppComponent.eventsInCartList.length;
+
+    HomeComponent.filteredEventsList.push(event);
+    // Sort the events by date
+    HomeComponent.filteredEventsList = HomeComponent.filteredEventsList.sort((a, b) => (a.date < b.date ? -1 : 1));
   }
 }
