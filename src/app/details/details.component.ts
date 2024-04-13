@@ -6,11 +6,13 @@ import { CommonModule } from '@angular/common';
 
 import { EventsService } from '../events.service';
 import { SingleEvent } from '../single-event';
+import { AppComponent } from '../app.component';
+import { HomeComponent } from '../home/home.component';
 
 @Component({
   selector: 'app-details',
   standalone: true,
-  imports: [ReactiveFormsModule, MatIconModule, CommonModule],
+  imports: [ReactiveFormsModule, MatIconModule, CommonModule, AppComponent, HomeComponent],
   template: `
   <article class="article">
   <div class="content">
@@ -27,6 +29,7 @@ import { SingleEvent } from '../single-event';
         <ul>
           <li class="listing-text" *ngFor="let artist of singleEvent?.artists">{{ artist.name }}</li>
         </ul>
+        <button class="addCartBtn" (click)="addToCart()">+</button>
       </ul>
     </section>
   </div>
@@ -47,7 +50,19 @@ export class DetailsComponent {
   constructor() {
     const eventId = parseInt(this.route.snapshot.params['id'], 10);
     this.eventsService.getEventById(eventId.toString()).then(singleEvent => {
-      this.singleEvent = singleEvent;
+      if (singleEvent) {
+        this.singleEvent = singleEvent;
+      } else {
+        console.log(`Event with ID ${eventId} not found.`);
+      }
     });
+  }
+
+  // Add event to the cart
+  addToCart() {
+    console.log('event', this.singleEvent);
+    // AppComponent.addToCart(this.singleEvent);
+    // Remove event from filteredEventsList
+    // HomeComponent.filteredEventsList = this.filteredEventsList.filter((e) => e._id !== event._id);
   }
 }
