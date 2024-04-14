@@ -49,7 +49,7 @@ export class DetailsComponent {
 
   constructor() {
     const eventId = parseInt(this.route.snapshot.params['id'], 10);
-    this.eventsService.getEventById(eventId.toString()).then(singleEvent => {
+    this.eventsService.getEventById(HomeComponent.selectedCity, eventId.toString()).then(singleEvent => {
       if (singleEvent) {
         this.singleEvent = singleEvent;
       } else {

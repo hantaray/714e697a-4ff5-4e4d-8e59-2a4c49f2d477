@@ -13,9 +13,9 @@ export class EventsService {
     return await data.json() ?? [];
   }
 
-  async getEventById(id: string): Promise<SingleEvent | undefined> {
+  async getEventById(city: string, id: string): Promise<SingleEvent | undefined> {
     // Fetch all events
-    const allEvents = await this.getAllEvents("berlin");
+    const allEvents = await this.getAllEvents(city);
 
     // Find the event with the given ID
     const event = allEvents.find(event => event._id.toString() === id);

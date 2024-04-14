@@ -60,15 +60,17 @@ export class HomeComponent {
 
   displayedDate: Date | null = null;
 
-  selectedCity: string = 'london';
+  static selectedCity: string = 'london';
 
   constructor() {
-    this.getEventsByCity(this.selectedCity);
+    this.getEventsByCity(HomeComponent.selectedCity);
     // Listen to scroll event to update displayed date
     window.addEventListener('scroll', this.updateDisplayedDate.bind(this));
   }
 
   get filteredEventsList() { return HomeComponent.filteredEventsList; }
+  get selectedCity() { return HomeComponent.selectedCity; }
+  set selectedCity(value: string) { HomeComponent.selectedCity = value; }
 
   getEventsByCity(city: string) {
     // Fetching all events from the service
