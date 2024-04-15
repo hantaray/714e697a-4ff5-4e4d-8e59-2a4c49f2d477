@@ -11,24 +11,7 @@ import { AppComponent } from '../app.component';
   selector: 'app-events',
   standalone: true,
   imports: [RouterModule, CommonModule, MatIconModule],
-  template: `
-  <section class="listing">
-    <!-- Display event title -->
-    <h2 class="listing-heading">{{ singleEvent.title }}</h2>
-    <!-- Display event flyer -->
-    <img class="listing-photo" [src]="singleEvent.flyerFront" alt="Exterior photo of {{singleEvent.flyerFront}}">
-    <!-- Display venue name and link to its location -->
-    <a href="{{ singleEvent.venue.direction}}" target="_blank"><mat-icon> location_on</mat-icon> {{ singleEvent.venue.name}}</a>
-    <!-- Display event start time -->
-    <p class="listing-time">Starts: {{singleEvent.startTime | date: 'dd.MM.yyyy hh:mm:ss'}}</p>
-    <!-- Display event end time -->
-    <p class="listing-time">Ends: {{singleEvent.endTime | date: 'dd.MM.yyyy hh:mm:ss'}}</p>
-    <!-- Link to show event details -->
-    <a [routerLink]="['details', singleEvent._id]">Show event</a>
-    <!-- Button to add event to cart -->
-    <button class="addCartBtn" (click)="addToCart(singleEvent)">+</button>
-  </section>
-  `,
+  templateUrl: './events.component.html',
   styleUrl: './events.component.sass'
 })
 export class EventsComponent {

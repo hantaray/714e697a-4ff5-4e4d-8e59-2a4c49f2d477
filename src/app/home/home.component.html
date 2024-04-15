@@ -1,1 +1,21 @@
-<p>home works!</p>
+<!-- Toolbar with search input and shopping cart -->
+<div class="toolbar">
+  <input class="search-input" type="text" placeholder="Search..." (input)="filterResults($event)">
+  <mat-select class="select-panel" (selectionChange)="getEventsByCity($event.value)" [(value)]="selectedCity">
+    <mat-option value="berlin">Berlin</mat-option>
+    <mat-option value="london">London</mat-option>
+  </mat-select>
+</div>
+
+<!-- Display the currently selected date -->
+<div class="sticky-date">
+  <h2>{{ displayedDate | date: 'dd.MM.yyyy' }}</h2>
+</div>
+
+<!-- Section to display events -->
+<section class="results">
+  <!-- Loop through filtered events and display them -->
+  <div *ngFor="let singleEvent of filteredEventsList" class="event" [attr.data-date]="singleEvent.date">
+    <app-events [singleEvent]="singleEvent" (click)="addToCart(singleEvent)"></app-events>
+  </div>
+</section>

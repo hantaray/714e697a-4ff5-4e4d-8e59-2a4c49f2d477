@@ -12,34 +12,7 @@ import { MatListModule } from '@angular/material/list';
   selector: 'app-root',
   standalone: true,
   imports: [HomeComponent, RouterModule, MatMenuModule, MatIconModule, MatListModule, CommonModule],
-  template: `
-  <main>
-    <header class="brand-name">
-        <a [routerLink]="['/']">
-          <img class="brand-logo" src="/assets/eventmood_logo.png" alt="EventMood logo" aria-hidden="true" />
-        </a>
-        <div class="menu-button">
-        <button class="shopping-cart-button" mat-icon-button [matMenuTriggerFor]="menu">
-          <mat-icon>shopping_cart</mat-icon>
-          <!-- Display the count of items in the cart -->
-          <span class='badge badge-warning' id='lblCartCount' *ngIf="cartContentCount > 0">{{cartContentCount}}</span>
-        </button>
-        <!-- Shopping cart menu -->
-        <mat-menu #menu="matMenu">
-          <h2 class="cart">Your events:</h2>
-          <p class="cart" *ngIf="cartContentCount == 0">There are no events in your cart</p>
-          <!-- Display events in the cart -->
-          <mat-list class="cart" role="list" *ngFor="let singleEvent of eventsInCartList">
-            <p>{{singleEvent.title}}</p><button mat-icon-button (click)="removeFromCart(singleEvent)">X</button>
-          </mat-list>
-        </mat-menu>
-      </div>
-      </header>
-    <section class="content">
-      <router-outlet></router-outlet>
-    </section>
-  </main>
-`,
+  templateUrl: './app.component.html',
   styleUrl: './app.component.sass'
 })
 export class AppComponent {

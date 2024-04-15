@@ -13,32 +13,7 @@ import { HomeComponent } from '../home/home.component';
   selector: 'app-details',
   standalone: true,
   imports: [ReactiveFormsModule, MatIconModule, CommonModule, AppComponent, HomeComponent],
-  template: `
-  <article class="article">
-  <div class="content">
-    <section class="listing-description">
-      <h1 class="listing-heading">{{singleEvent?.title}}</h1>
-      <p class="listing-location">{{singleEvent?.city}}, {{singleEvent?.country}}</p>
-      <ul>
-        <li class="listing-text"><a href="{{ singleEvent?.venue?.direction }}" target="_blank"><mat-icon> location_on</mat-icon> {{ singleEvent?.venue?.name }}</a></li>
-        <li class="listing-text">Starts: {{ singleEvent?.startTime | date: 'dd.MM.yyyy hh:mm:ss' }}</li>
-        <li class="listing-text">Ends: {{ singleEvent?.endTime | date: 'dd.MM.yyyy hh:mm:ss' }}</li>
-        <li class="listing-text">Attending people: {{ singleEvent?.attending }}</li>
-        <li class="listing-text">Private event?: {{ singleEvent?.private }}</li>
-        <li class="listing-text">Artists:</li>
-        <ul>
-          <li class="listing-text" *ngFor="let artist of singleEvent?.artists">{{ artist.name }}</li>
-        </ul>
-        <button class="addCartBtn" (click)="addToCart()">+</button>
-      </ul>
-    </section>
-  </div>
-  <div class="image-container">
-    <img class="listing-flyer" [src]="singleEvent?.flyerFront" alt="Flyer image of {{singleEvent?.flyerFront}}" />
-  </div>
-</article>
-
-`,
+  templateUrl: './details.component.html',
   styleUrl: './details.component.sass'
 })
 
