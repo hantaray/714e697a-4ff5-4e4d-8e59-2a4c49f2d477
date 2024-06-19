@@ -6,6 +6,7 @@ import { SingleEvent } from '../single-event';
 import { MatDialog } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import { AppComponent } from '../app.component';
+import { HomeComponent } from '../home/home.component';
 
 @Component({
   selector: 'app-events',
@@ -18,8 +19,9 @@ export class EventsComponent {
   @Input() singleEvent!: SingleEvent; // Input property to receive single event data
   constructor(public dialog: MatDialog) { } // MatDialog injection for displaying dialogs
 
-  addToCart(eventId: SingleEvent) {
-    // this.addToCartClicked.emit(); // Emit event when adding to cart button is clicked
-    AppComponent.addToCart(eventId);
+  addToCart(event: SingleEvent) {
+    AppComponent.addToCart(event);
+    // Remove event from filteredEventsList
+    HomeComponent.filteredEventsList = HomeComponent.filteredEventsList.filter((e) => e._id !== event._id);
   }
 }
