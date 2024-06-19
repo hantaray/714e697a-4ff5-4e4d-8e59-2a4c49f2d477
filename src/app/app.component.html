@@ -16,7 +16,7 @@
         <!-- Display events in the cart -->
         <mat-list (click)="$event.stopPropagation()" class="cart" role="list"
           *ngFor="let singleEvent of eventsInCartList">
-          <p>{{singleEvent.title}}</p><button mat-icon-button
+          <p>{{singleEvent.title}}</p><button class="delete-from-cart-button"
             (click)="removeFromCart(singleEvent); $event.stopPropagation()">X</button>
         </mat-list>
       </mat-menu>
