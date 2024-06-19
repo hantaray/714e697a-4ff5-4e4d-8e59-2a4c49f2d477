@@ -2,8 +2,8 @@
 <div class="toolbar">
   <input class="search-input" type="text" placeholder="Search events..." (input)="filterResults($event)">
   <mat-select class="select-panel" (selectionChange)="getEventsByCity($event.value)" [(value)]="selectedCity">
-    <mat-option value="berlin">Berlin</mat-option>
-    <mat-option value="london">London</mat-option>
+    <mat-option style="background-color: white;" value="berlin">Berlin</mat-option>
+    <mat-option style="background-color: white;" value="london">London</mat-option>
   </mat-select>
 </div>
 
